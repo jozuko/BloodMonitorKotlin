@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.studio.jozu.bloodmonitor.view.presenter.SignUpPresenter" />
+
+        <variable
+            name="user"
+            type="com.studio.jozu.bloodmonitor.domain.aws.SignInUser" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in_user_name" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_mail_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.mailAddress}" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in_password" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.password}" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in_password_confirm" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.password}" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="@{() -> presenter.onClickSignUp()}"
+                android:text="@string/button_sign_up" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="@{() -> presenter.onClickShowSignIn()}"
+                android:text="@string/button_show_sign_in" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

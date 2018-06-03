@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">BloodMonitorKotlin</string>
+    <string name="app_name">Blood Monitor</string>
+
+    <string name="sign_in_user_name">メールアドレス</string>
+    <string name="sign_in_password">パスワード</string>
+    <string name="sign_in_password_confirm">パスワード（確認用）</string>
+
+    <string name="button_sign_in">ログイン</string>
+    <string name="button_sign_up">新規登録</string>
+    <string name="button_show_sign_in">すでに登録済みの方はこちら</string>
+    <string name="button_show_sign_up">新しく登録する方はこちら</string>
 </resources>
