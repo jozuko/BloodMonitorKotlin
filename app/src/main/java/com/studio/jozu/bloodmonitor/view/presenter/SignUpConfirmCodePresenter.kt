@@ -7,7 +7,7 @@ import com.studio.jozu.bloodmonitor.domain.signin.SignUpConfirmCode
 import com.studio.jozu.bloodmonitor.domain.signin.SignUpUser
 import com.studio.jozu.bloodmonitor.event.signin.ShowSignInFragmentEvent
 import com.studio.jozu.bloodmonitor.event.signin.ShowSignUpFragmentEvent
-import com.studio.jozu.bloodmonitor.event.signin.VerifySignUpConfirmCodeEvent
+import com.studio.jozu.bloodmonitor.event.signin.VerifyConfirmCodeEvent
 import com.studio.jozu.bloodmonitor.service.aws.CognitoManager
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
@@ -31,7 +31,7 @@ class SignUpConfirmCodePresenter(private val binding: FragmentSignUpConfirmCodeB
         // データチェック
         val verifySendResult = signUpConfirmCode.verifySendCode()
         EventBus.getDefault().post(verifySendResult)
-        if(verifySendResult != VerifySignUpConfirmCodeEvent.OK) return
+        if(verifySendResult != VerifyConfirmCodeEvent.OK) return
 
         // 確認コード再送要求
         cognitoManager.sendConfirmCode(signUpConfirmCode)
@@ -46,7 +46,7 @@ class SignUpConfirmCodePresenter(private val binding: FragmentSignUpConfirmCodeB
         // データチェック
         val verifyRequestResult = signUpConfirmCode.verifyRequestCode()
         EventBus.getDefault().post(verifyRequestResult)
-        if(verifyRequestResult != VerifySignUpConfirmCodeEvent.OK) return
+        if(verifyRequestResult != VerifyConfirmCodeEvent.OK) return
 
         // 確認コード再送要求
         cognitoManager.requestConfirmCode(signUpConfirmCode)

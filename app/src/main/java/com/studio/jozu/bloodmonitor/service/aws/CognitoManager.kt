@@ -3,10 +3,12 @@ package com.studio.jozu.bloodmonitor.service.aws
 import android.content.Context
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.auth.AnonymousAWSCredentials
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserAttributes
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserCodeDeliveryDetails
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.*
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.AuthenticationContinuation
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.AuthenticationDetails
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.ChallengeContinuation
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.SignUpHandler
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.VerificationHandler
@@ -15,10 +17,12 @@ import com.amazonaws.services.cognitoidentityprovider.AmazonCognitoIdentityProvi
 import com.amazonaws.services.cognitoidentityprovider.model.CodeMismatchException
 import com.amazonaws.services.cognitoidentityprovider.model.UsernameExistsException
 import com.studio.jozu.bloodmonitor.di.AppComponent
+import com.studio.jozu.bloodmonitor.domain.signin.SignInUser
 import com.studio.jozu.bloodmonitor.domain.signin.SignUpConfirmCode
 import com.studio.jozu.bloodmonitor.domain.signin.SignUpUser
 import com.studio.jozu.bloodmonitor.event.signin.RequestConfirmCodeResultEvent
 import com.studio.jozu.bloodmonitor.event.signin.SendConfirmCodeResultEvent
+import com.studio.jozu.bloodmonitor.event.signin.SignInResultEvent
 import com.studio.jozu.bloodmonitor.event.signin.SignUpResultEvent
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
@@ -126,5 +130,48 @@ class CognitoManager {
                         EventBus.getDefault().post(RequestConfirmCodeResultEvent.FAIL)
                     }
                 })
+    }
+
+    /**
+     * ログイン処理
+     */
+    fun signInBackground(signInUser: SignInUser) {
+        userPool.getUser(signInUser.mailAddress)
+                .getSessionInBackground(object : AuthenticationHandler {
+                    override fun onSuccess(userSession: CognitoUserSession?, newDevice: CognitoDevice?) {
+                        Timber.d("getSessionInBackground : onSuccess")
+
+                        EventBus.getDefault().post(SignInResultEvent.SUCCESS)
+                    }
+
+                    override fun getAuthenticationDetails(authenticationContinuation: AuthenticationContinuation, userId: String?) {
+                        Timber.d("getSessionInBackground : getAuthenticationDetails")
+
+                        getUserAuthentication(authenticationContinuation, signInUser)
+                    }
+
+                    override fun onFailure(exception: Exception?) {
+                        Timber.d("getSessionInBackground : onFailure")
+
+                        Timber.e(exception)
+                        EventBus.getDefault().post(SignInResultEvent.FAIL)
+                    }
+
+                    override fun authenticationChallenge(continuation: ChallengeContinuation?) {
+                        Timber.d("getSessionInBackground : authenticationChallenge")
+                        TODO("not implemented")
+                    }
+
+                    override fun getMFACode(continuation: MultiFactorAuthenticationContinuation?) {
+                        Timber.d("getSessionInBackground : authenticationChallenge")
+                        TODO("not implemented")
+                    }
+                })
+    }
+
+    private fun getUserAuthentication(continuation: AuthenticationContinuation, signInUser: SignInUser) {
+        val authenticationDetails = AuthenticationDetails(signInUser.mailAddress, signInUser.password, null)
+        continuation.setAuthenticationDetails(authenticationDetails)
+        continuation.continueTask()
     }
 }

@@ -10,7 +10,11 @@ import com.google.gson.Gson
 import com.studio.jozu.bloodmonitor.R
 import com.studio.jozu.bloodmonitor.databinding.FragmentSignInBinding
 import com.studio.jozu.bloodmonitor.domain.signin.SignInUser
+import com.studio.jozu.bloodmonitor.event.signin.SignInResultEvent
+import com.studio.jozu.bloodmonitor.event.signin.VerifySignInUserEvent
 import com.studio.jozu.bloodmonitor.view.presenter.SignInPresenter
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 
 class SignInFragment : BaseFragmentEventBus {
@@ -55,5 +59,26 @@ class SignInFragment : BaseFragmentEventBus {
 
         Timber.d("args user = $user")
         return user
+    }
+
+    @Suppress("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onVerifySignInUserEvent(event: VerifySignInUserEvent) {
+        when(event){
+            VerifySignInUserEvent.EMPTY_EMAIL -> showToast(R.string.message_empty_email)
+            VerifySignInUserEvent.EMPTY_PASSWORD -> showToast(R.string.message_empty_password)
+            else -> {
+                // do nothing.
+            }
+        }
+    }
+
+    @Suppress("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onSignInResultEvent(event: SignInResultEvent) {
+        when(event) {
+            SignInResultEvent.SUCCESS -> Timber.i("login success.")
+            else -> showToast(R.string.message_sign_in_fail)
+        }
     }
 }

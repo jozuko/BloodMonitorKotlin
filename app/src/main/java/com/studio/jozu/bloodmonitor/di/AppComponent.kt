@@ -2,6 +2,7 @@ package com.studio.jozu.bloodmonitor.di
 
 import com.studio.jozu.bloodmonitor.BloodMonitorApplication
 import com.studio.jozu.bloodmonitor.service.aws.CognitoManager
+import com.studio.jozu.bloodmonitor.view.presenter.SignInPresenter
 import com.studio.jozu.bloodmonitor.view.presenter.SignUpConfirmCodePresenter
 import com.studio.jozu.bloodmonitor.view.presenter.SignUpPresenter
 import javax.inject.Singleton
@@ -22,6 +23,7 @@ interface AppComponent {
 
     fun inject(cognitoManager: CognitoManager)
 
+    fun inject(singInPresenter: SignInPresenter)
     fun inject(singUpPresenter: SignUpPresenter)
     fun inject(singUpConfirmCodePresenter: SignUpConfirmCodePresenter)
 }

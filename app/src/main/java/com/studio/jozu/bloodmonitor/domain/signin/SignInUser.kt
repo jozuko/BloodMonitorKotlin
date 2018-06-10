@@ -1,6 +1,7 @@
 package com.studio.jozu.bloodmonitor.domain.signin
 
 import com.google.gson.annotations.SerializedName
+import com.studio.jozu.bloodmonitor.event.signin.VerifySignInUserEvent
 import com.studio.jozu.bloodmonitor.event.signin.VerifySignUpUserEvent
 
 data class SignInUser(
@@ -11,10 +12,10 @@ data class SignInUser(
         val password: String = ""
 ) {
 
-    fun verify(): VerifySignUpUserEvent {
-        if(mailAddress.isEmpty()) return VerifySignUpUserEvent.EMPTY_EMAIL
-        if(password.isEmpty()) return VerifySignUpUserEvent.EMPTY_PASSWORD
+    fun verify(): VerifySignInUserEvent {
+        if(mailAddress.isEmpty()) return VerifySignInUserEvent.EMPTY_EMAIL
+        if(password.isEmpty()) return VerifySignInUserEvent.EMPTY_PASSWORD
 
-        return VerifySignUpUserEvent.OK
+        return VerifySignInUserEvent.OK
     }
 }
