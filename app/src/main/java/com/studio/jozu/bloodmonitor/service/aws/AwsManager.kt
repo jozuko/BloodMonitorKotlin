@@ -8,12 +8,13 @@ import timber.log.Timber
 import java.io.InputStream
 import java.io.InputStreamReader
 
-object AwsManager {
-    private lateinit var aws: Aws
+class AwsManager(aContext: Context) {
 
-    fun setup(aContext: Context) {
+    lateinit var aws: Aws
+        private set
+
+    init {
         readSettings(aContext)
-        CognitoManager.setup(aContext = aContext, aAws = aws)
     }
 
     private fun readSettings(aContext: Context) {

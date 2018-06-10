@@ -5,11 +5,11 @@
 
         <variable
             name="presenter"
-            type="com.studio.jozu.bloodmonitor.view.presenter.SignUpPresenter" />
+            type="com.studio.jozu.bloodmonitor.view.presenter.SignUpConfirmCodePresenter" />
 
         <variable
-            name="user"
-            type="com.studio.jozu.bloodmonitor.domain.signin.SignUpUser" />
+            name="signUpConfirmCode"
+            type="com.studio.jozu.bloodmonitor.domain.signin.SignUpConfirmCode" />
     </data>
 
 
@@ -32,36 +32,32 @@
                 android:id="@+id/edit_mail_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{user.mailAddress}" />
+                android:text="@{signUpConfirmCode.mailAddress}" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_in_password" />
+                android:text="@string/sign_in_confirm_code" />
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_password"
+                android:id="@+id/edit_confirm_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{user.password}" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_in_password_confirm" />
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_password_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{user.confirmPassword}" />
+                android:text="@{signUpConfirmCode.confirmCode}" />
 
             <android.support.v7.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:onClick="@{() -> presenter.onClickSignUp()}"
-                android:text="@string/button_sign_up" />
+                android:onClick="@{() -> presenter.onClickSendConfirmCode()}"
+                android:text="@string/button_send_confirm_code" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="@{() -> presenter.onClickRequestConfirmCode()}"
+                android:text="@string/button_request_confirm_code" />
 
             <android.support.v7.widget.AppCompatButton
                 android:layout_width="wrap_content"
@@ -74,8 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:onClick="@{() -> presenter.onClickShowSignUpConfirmCode()}"
-                android:text="@string/button_show_sign_up_confirm_code" />
+                android:onClick="@{() -> presenter.onClickShowSignUp()}"
+                android:text="@string/button_show_sign_up" />
         </LinearLayout>
 
     </ScrollView>

@@ -4,9 +4,24 @@
     <string name="sign_in_user_name">メールアドレス</string>
     <string name="sign_in_password">パスワード</string>
     <string name="sign_in_password_confirm">パスワード（確認用）</string>
+    <string name="sign_in_confirm_code">確認コード</string>
 
     <string name="button_sign_in">ログイン</string>
     <string name="button_sign_up">新規登録</string>
+    <string name="button_send_confirm_code">確認コード送信</string>
+    <string name="button_request_confirm_code">確認コードをもう一度受け取る</string>
     <string name="button_show_sign_in">すでに登録済みの方はこちら</string>
     <string name="button_show_sign_up">新しく登録する方はこちら</string>
+    <string name="button_show_sign_up_confirm_code">確認コードの入力はこちら</string>
+
+    <string name="message_empty_email">メールアドレスを入力してください</string>
+    <string name="message_empty_password">パスワードを入力してください</string>
+    <string name="message_empty_confirm_code">確認コードを入力してください</string>
+    <string name="message_different_password">パスワードが、確認用と異なります。</string>
+    <string name="message_sign_up_fail_user_exist">入力されたメールアドレスは、すでに登録されています。</string>
+    <string name="message_sign_up_fail">ユーザ登録に失敗しました。</string>
+    <string name="message_request_confirm_success">確認コードを再送しました。</string>
+    <string name="message_request_confirm_fail">確認コードの再送に失敗しました。</string>
+    <string name="message_send_confirm_code_mismatch_fail">確認コードが誤っています。</string>
+    <string name="message_send_confirm_fail">確認コードの送信に失敗しました。</string>
 </resources>

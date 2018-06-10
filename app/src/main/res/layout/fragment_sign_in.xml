@@ -9,7 +9,7 @@
 
         <variable
             name="user"
-            type="com.studio.jozu.bloodmonitor.domain.aws.SignInUser" />
+            type="com.studio.jozu.bloodmonitor.domain.signin.SignInUser" />
     </data>
 
     <ScrollView
@@ -57,6 +57,13 @@
                 android:layout_marginTop="8dp"
                 android:onClick="@{() -> presenter.onClickShowSignUp()}"
                 android:text="@string/button_show_sign_up" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="@{() -> presenter.onClickShowSignUpConfirmCode()}"
+                android:text="@string/button_show_sign_up_confirm_code" />
         </LinearLayout>
 
     </ScrollView>

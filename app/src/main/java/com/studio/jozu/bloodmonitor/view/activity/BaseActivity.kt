@@ -5,17 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.studio.jozu.bloodmonitor.R
 import org.greenrobot.eventbus.EventBus
 
-abstract class ActivityBase : AppCompatActivity() {
-
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
+abstract class BaseActivity : AppCompatActivity() {
 
     protected fun currentFragment(): Fragment? =
             supportFragmentManager.findFragmentById(R.id.fragment_base)

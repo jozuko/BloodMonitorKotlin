@@ -1,6 +1,7 @@
 package com.studio.jozu.bloodmonitor
 
 import android.app.Application
+import com.studio.jozu.bloodmonitor.di.AppComponent
 import com.studio.jozu.bloodmonitor.service.aws.AwsManager
 import com.studio.jozu.bloodmonitor.service.log.DebugLogTree
 import com.studio.jozu.bloodmonitor.service.log.InfoLogTree
@@ -18,6 +19,6 @@ class BloodMonitorApplication : Application() {
             Timber.plant(InfoLogTree())
         }
 
-        AwsManager.setup(this)
+        AppComponent.Component.initComponent(this)
     }
 }

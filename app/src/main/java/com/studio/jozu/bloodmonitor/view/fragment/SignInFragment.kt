@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import com.google.gson.Gson
 import com.studio.jozu.bloodmonitor.R
 import com.studio.jozu.bloodmonitor.databinding.FragmentSignInBinding
-import com.studio.jozu.bloodmonitor.domain.aws.SignInUser
+import com.studio.jozu.bloodmonitor.domain.signin.SignInUser
 import com.studio.jozu.bloodmonitor.view.presenter.SignInPresenter
 import timber.log.Timber
 
-class SignInFragment : FragmentBase {
+class SignInFragment : BaseFragmentEventBus {
 
     companion object {
         private const val ARGS_KEY_USER = "key_user"
